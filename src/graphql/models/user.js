@@ -25,7 +25,9 @@ export const resolvers = {
   },
 
   Mutation: {
-    createUser: (_, { user }) => {
+    createUser: async (_, { user }, { mongo }) => {
+      const movies = await mongo.movies.find().toArray();
+      console.log(movies);
       return { id: 2, ...user };
     },
   },
