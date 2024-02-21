@@ -22,6 +22,7 @@ export async function setupDatabase() {
       db,
       users: db.collection("users"),
       movies: db.collection("movies"),
+      comments: db.collection("comments"),
     };
   } catch (e) {
     console.error("Error connectint to the db", e);
