@@ -26,6 +26,8 @@ export const typeDef = /* GraphQL */ `
     id: ID!
     name: String
     email: String
+
+    comments: [Comment]
   }
 `;
 
@@ -65,5 +67,8 @@ export const resolvers = {
   User: {
     id: ({ id, _id }) => _id || id,
     name: (obj) => obj.name.trim().toUpperCase(),
+    comments: ({ email }, args, { mongo }) => {
+      return mongo.comments.find({ email }).limit(20).toArray();
+    },
   },
 };
